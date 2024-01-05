@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -10,8 +12,8 @@ namespace diploma_thesis
 {
     public partial class MainWindow : Window
     {
-        private List<QuestionData> questionsList = new List<QuestionData>();
-        private Random random = new Random();
+        private List<QuestionData> questionsList = new ();
+        private Random random = new ();
         private int answeredQuestions = 0;
         private const int TotalQuestions = 30;
         private int correctAnswers = 0;
@@ -19,35 +21,46 @@ namespace diploma_thesis
         public MainWindow()
         {
             InitializeComponent();
-            ReadQuestionsFromFile();
+            ReadQuestionsFromResource();
             SetRandomQuestion();
         }
 
-        private void ReadQuestionsFromFile()
+        private void ReadQuestionsFromResource()
         {
             try
             {
-                using (StreamReader sr = new StreamReader(@"C:\Users\harry\source\repos\diploma thesis\diploma thesis\Images1\Questions.txt"))
+                string resourceName = "diploma_thesis.Images1.Questions.txt";
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
                 {
-                    while (!sr.EndOfStream)
+                    if (stream != null)
                     {
-                        string? question = sr.ReadLine();
-                        string? answer1 = sr.ReadLine();
-                        string? answer2 = sr.ReadLine();
-                        string? answer3 = sr.ReadLine();
-                        string? answer4 = sr.ReadLine();
-                        string? correctAnswer = sr.ReadLine();
-
-                        if (question != null && answer1 != null && answer2 != null && answer3 != null && answer4 != null && correctAnswer != null)
+                        using (StreamReader sr = new StreamReader(stream))
                         {
-                            questionsList.Add(new QuestionData(question, answer1, answer2, answer3, answer4, correctAnswer));
+                            while (!sr.EndOfStream)
+                            {
+                                string? question = sr.ReadLine();
+                                string? answer1 = sr.ReadLine();
+                                string? answer2 = sr.ReadLine();
+                                string? answer3 = sr.ReadLine();
+                                string? answer4 = sr.ReadLine();
+                                string? correctAnswer = sr.ReadLine();
+
+                                if (question != null && answer1 != null && answer2 != null && answer3 != null && answer4 != null && correctAnswer != null)
+                                {
+                                    questionsList.Add(new QuestionData(question, answer1, answer2, answer3, answer4, correctAnswer));
+                                }
+                            }
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ресурс Questions.txt не найден.");
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка чтения вопросов из файла: {ex.Message}");
+                MessageBox.Show($"Ошибка чтения вопросов из ресурса: {ex.Message}");
             }
         }
 

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
     <RootNamespace>diploma_thesis</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images1\Questions.txt" />
+    <None Remove="Images1\questions.txt" />
     <None Remove="Images1\Test verification.jpg" />
     <None Remove="Images1\Test.jpg" />
     <None Remove="Questions.txt" />
@@ -19,13 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Images1\Questions.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CustomToolNamespace>diploma_thesis</CustomToolNamespace>
+    </EmbeddedResource>
     <Content Include="Images1\Test verification.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images1\Test.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images1\Questions.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -35,10 +36,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Serilog" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Questions.txt" />
+    <Content Include="Questions.txt" />
     <Resource Include="Test verification.jpg" />
     <Resource Include="Test.jpg" />
   </ItemGroup>
