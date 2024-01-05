@@ -26,7 +26,7 @@ namespace diploma_thesis
 
         private void RepeatButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new ();
             mainWindow.Show();
             Close();
         }

@@ -23,9 +23,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <CustomToolNamespace>diploma_thesis</CustomToolNamespace>
     </EmbeddedResource>
-    <Content Include="Images1\Test verification.jpg">
+    <Resource Include="Images1\Test verification.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
     <Content Include="Images1\Test.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

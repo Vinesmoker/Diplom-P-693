@@ -8,7 +8,7 @@
             <ColumnDefinition Width="153*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://C:\Users\harry\source\repos\diploma thesis\diploma thesis\Images1\Test verification.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="pack://application:,,,/diploma thesis;component/Images1/Test verification.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.8" Margin="138,81,0,0" Grid.Column="1">
             <TextBox x:Name="QuestionTextBox" Width="207" Height="24" Background="#00000000" Foreground="Black" IsReadOnly="True" TextWrapping="Wrap" Text="           Хотите повторить тест?" FontWeight="Bold" BorderBrush="Transparent" BorderThickness="0"/>
