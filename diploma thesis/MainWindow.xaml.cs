@@ -12,8 +12,8 @@ namespace diploma_thesis
 {
     public partial class MainWindow : Window
     {
-        private List<QuestionData> questionsList = new ();
-        private Random random = new ();
+        private readonly List<QuestionData> questionsList = new ();
+        private readonly Random random = new ();
         private int answeredQuestions = 0;
         private const int TotalQuestions = 30;
         private int correctAnswers = 0;
@@ -29,12 +29,12 @@ namespace diploma_thesis
         {
             try
             {
-                string resourceName = "diploma_thesis.Images1.Questions.txt";
-                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+                string? resourceName = "diploma_thesis.Images1.Questions.txt";
+                using Stream? stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
                 {
                     if (stream != null)
                     {
-                        using (StreamReader sr = new StreamReader(stream))
+                        using StreamReader sr = new(stream);
                         {
                             while (!sr.EndOfStream)
                             {
@@ -68,7 +68,7 @@ namespace diploma_thesis
         {
             if (answeredQuestions < TotalQuestions)
             {
-                QuestionData randomQuestion = GetUnusedRandomQuestion();
+                QuestionData? randomQuestion = GetUnusedRandomQuestion();
                 if (randomQuestion != null)
                 {
                     Question.Text = randomQuestion.Question;
@@ -97,7 +97,7 @@ namespace diploma_thesis
             }
         }
 
-        private QuestionData GetUnusedRandomQuestion()
+        private QuestionData? GetUnusedRandomQuestion()
         {
             List<QuestionData> unusedQuestions = questionsList.FindAll(q => !q.Used);
             if (unusedQuestions.Count > 0)
@@ -114,7 +114,7 @@ namespace diploma_thesis
         {
             Button clickedButton = (Button)sender;
             string? selectedAnswer = clickedButton.Content?.ToString();
-            QuestionData currentQuestion = GetCurrentQuestion();
+            QuestionData? currentQuestion = GetCurrentQuestion();
             if (currentQuestion != null && selectedAnswer == currentQuestion.CorrectAnswer)
             {
                 correctAnswers++;
@@ -136,7 +136,7 @@ namespace diploma_thesis
             Close();
         }
 
-        private QuestionData GetCurrentQuestion()
+        private QuestionData? GetCurrentQuestion()
         {
             return questionsList.FirstOrDefault(q => q.Used && q.Question == Question.Text);
         }
