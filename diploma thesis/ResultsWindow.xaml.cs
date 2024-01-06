@@ -5,8 +5,8 @@ namespace diploma_thesis
 {
     public partial class ResultsWindow : Window
     {
-        private int correctAnswers;
-        private int totalQuestions;
+        private readonly int correctAnswers;
+        private readonly int totalQuestions;
 
         public ResultsWindow(int correctAnswers, int totalQuestions)
         {
