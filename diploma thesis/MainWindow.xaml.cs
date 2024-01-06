@@ -131,7 +131,7 @@ namespace diploma_thesis
 
         private void ShowResultsWindow()
         {
-            ResultsWindow resultsWindow = new ResultsWindow(correctAnswers, TotalQuestions);
+            ResultsWindow resultsWindow = new (correctAnswers, TotalQuestions);
             resultsWindow.ShowDialog();
             Close();
         }
